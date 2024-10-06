@@ -1,4 +1,4 @@
-# OlympicGamesStarter
+# 🏅 Project 2 - Develop the front-end using Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
 
