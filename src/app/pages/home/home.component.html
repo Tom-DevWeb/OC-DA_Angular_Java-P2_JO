@@ -1,4 +1,5 @@
 <div class="home">
+  <app-header [title]="title" [indicators]="indicators"/>
   <div class="chart">
     <ngx-charts-pie-chart
       (select)="onChartClick($event)"

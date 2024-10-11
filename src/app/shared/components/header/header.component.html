@@ -1,0 +1,9 @@
+<header>
+  <h2>{{ title }}</h2>
+
+  <div class="details">
+    <p *ngFor="let indicator of indicators">
+      {{ indicator.title }} <span>{{ indicator.indicator | async }}</span>
+    </p>
+  </div>
+</header>

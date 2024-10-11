@@ -8,10 +8,11 @@ import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {PieChartModule} from "@swimlane/ngx-charts";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {IconMedalComponent} from "../assets/icon-medal.component";
+import {HeaderComponent} from "./shared/components/header/header.component";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, PieChartModule, IconMedalComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, PieChartModule, IconMedalComponent, HeaderComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
