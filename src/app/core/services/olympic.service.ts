@@ -1,7 +1,7 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, retry, throwError} from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Olympic} from "../models/Olympic";
 
 @Injectable({
@@ -11,11 +11,12 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json'
   private olympics$ = new BehaviorSubject<Olympic[]>([])
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
   loadInitialData() {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => {
-        console.log(this.olympics$)
         this.olympics$.next(value)
       }),
       retry(5),
