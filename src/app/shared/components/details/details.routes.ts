@@ -3,7 +3,11 @@ import {DetailsComponent} from "./details.component";
 
 export const detailsRoutes: Routes = [
   {
-    path: '',
+    path: ':country',
     component: DetailsComponent
+  },
+  {
+    path: '',
+    redirectTo: '/404', pathMatch: 'full'
   }
 ]

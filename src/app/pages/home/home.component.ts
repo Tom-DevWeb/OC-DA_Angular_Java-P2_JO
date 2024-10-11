@@ -8,6 +8,7 @@ import {ResizeChartService} from "../../core/services/resize-chart.service";
 import {IconMedalComponent} from "../../../assets/icon-medal.component";
 import {HeaderComponent} from "../../shared/components/header/header.component";
 import {AsyncPipe} from "@angular/common";
+import {HeaderIndicator} from "../../core/models/HeaderIndicator";
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ import {AsyncPipe} from "@angular/common";
 export class HomeComponent implements OnInit, OnDestroy {
 
   title!: string
-  indicators!: { title: string; indicator: Observable<number> }[]
+  indicators!: HeaderIndicator[]
 
   public olympics$!: Observable<Olympic[]>
   public pieChartData$!: Observable<PieChartModule[]>

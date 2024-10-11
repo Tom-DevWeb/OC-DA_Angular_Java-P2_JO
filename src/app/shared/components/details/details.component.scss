@@ -1,0 +1,25 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+a {
+  box-sizing: border-box;
+  background: #04838f;
+  color: white;
+  font-size: 18px;
+  border: 2px solid #04838f;
+  padding: 8px 24px;
+  margin-right: auto;
+  border-radius: 12px;
+  text-decoration: none;
+
+  &:hover {
+    box-sizing: border-box;
+    background: white;
+    color: #04838f;
+    font-size: 18px;
+  }
+}
