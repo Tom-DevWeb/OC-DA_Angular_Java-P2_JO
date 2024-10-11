@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {map, Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {map, Observable, Subscription} from 'rxjs';
 import {OlympicService} from 'src/app/core/services/olympic.service';
 import {Olympic} from "../../core/models/Olympic";
 import {Color, PieChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {Router} from "@angular/router";
+import {ResizeChartService} from "../../core/services/resize-chart.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   title!: string
   indicators!: { title: string; indicator: Observable<number> }[]
@@ -19,10 +20,12 @@ export class HomeComponent implements OnInit {
   public pieChartData$!: Observable<PieChartModule[]>
   viewWitdh!: number
   viewHeight!: number
+  resizeSubscription$!: Subscription
 
   constructor(
     private olympicService: OlympicService,
     private router: Router,
+    private resizeChartService: ResizeChartService
   ) {
   }
 
@@ -37,6 +40,17 @@ export class HomeComponent implements OnInit {
     ]
 
     this.pieChartData$ = this.formatDataForChart()
+
+    this.resizeSubscription$ = this.resizeChartService
+      .getWindowSize()
+      .subscribe((size) => {
+        this.viewWitdh = size.width
+        this.viewHeight = size.height
+      })
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription$.unsubscribe()
   }
 
 
