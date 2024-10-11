@@ -1,3 +1,19 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="home">
+  <div class="chart">
+    <ngx-charts-pie-chart
+      (select)="onChartClick($event)"
+      [view]="[viewWitdh, viewHeight]"
+      [results]="pieChartData$ | async"
+      [scheme]="colorScheme"
+      [labels]="true"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <p>{{ model.name }}</p>
+        <p class="value">
+          <app-icon-medal/>
+          {{ model.value }}
+        </p>
+      </ng-template>
+    </ngx-charts-pie-chart>
+  </div>
+</div>
