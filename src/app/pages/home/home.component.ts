@@ -5,16 +5,22 @@ import {Olympic} from "../../core/models/Olympic";
 import {Color, PieChartModule, ScaleType} from "@swimlane/ngx-charts";
 import {Router} from "@angular/router";
 import {ResizeChartService} from "../../core/services/resize-chart.service";
+import {IconMedalComponent} from "../../../assets/icon-medal.component";
+import {HeaderComponent} from "../../shared/components/header/header.component";
+import {AsyncPipe} from "@angular/common";
+import {HeaderIndicator} from "../../core/models/HeaderIndicator";
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [PieChartModule, IconMedalComponent, HeaderComponent, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
   title!: string
-  indicators!: { title: string; indicator: Observable<number> }[]
+  indicators!: HeaderIndicator[]
 
   public olympics$!: Observable<Olympic[]>
   public pieChartData$!: Observable<PieChartModule[]>

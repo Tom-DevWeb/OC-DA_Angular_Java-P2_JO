@@ -1,8 +1,9 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, retry, throwError} from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, map, Observable, retry, throwError} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import {Olympic} from "../models/Olympic";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,12 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json'
   private olympics$ = new BehaviorSubject<Olympic[]>([])
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
   loadInitialData() {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => {
-        console.log(this.olympics$)
         this.olympics$.next(value)
       }),
       retry(5),
@@ -25,6 +27,25 @@ export class OlympicService {
 
   getOlympics() {
     return this.olympics$.asObservable();
+  }
+
+  getDetailsByCountry(country: string): Observable<Olympic> {
+    return this.olympics$.pipe(
+      map((olympics) => {
+        const foundOlympic = olympics.find(
+          (olympic) => olympic.country === country,
+        )
+        if (!foundOlympic) {
+          console.log('error')
+          this.router.navigateByUrl('/404')
+          throw new Error('Country not found')
+        }
+        return foundOlympic
+      }),
+      catchError(() => {
+        return throwError(() => new Error('Country not found!'))
+      })
+    )
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,0 +1,15 @@
+<div class="details">
+  <app-header [title]="title" [indicators]="indicators"/>
+  <ngx-charts-line-chart
+    [results]="lineChartData$ | async"
+    [view]="[viewWitdh, viewHeight]"
+    [scheme]="colorScheme"
+    [yAxis]="true"
+    [xAxis]="true"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [xAxisLabel]="xAxisLabel"
+    [autoScale]="true"
+  ></ngx-charts-line-chart>
+  <a routerLink="/">Go back</a>
+</div>
