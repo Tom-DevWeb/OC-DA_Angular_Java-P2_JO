@@ -89,7 +89,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   getTotalMedals(olympic: Olympic): Observable<number> {
     return of(
       olympic.participations.reduce(
-        (acc, olympic) => acc + olympic.athleteCount,
+        (acc, olympic) => acc + olympic.medalsCount,
         0,
       )
     )
